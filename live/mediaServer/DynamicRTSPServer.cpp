@@ -21,6 +21,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include "DynamicRTSPServer.hh"
 #include <liveMedia.hh>
 #include <string.h>
+#include "ffmpeg_server_demux.h"
 
 DynamicRTSPServer*
 DynamicRTSPServer::createNew(UsageEnvironment& env, Port ourPort,
@@ -234,6 +235,14 @@ static ServerMediaSession* createNewSMS(UsageEnvironment& env,
     while ((smss = creationState.demux->newServerMediaSubsession()) != NULL) {
       sms->addSubsession(smss);
     }
+  } else if (strcmp(extension, ".mp4") == 0 ) {
+	  //use ffmpeg
+	  NEW_SMS("ffmpeg");
+	  FfmpegServerDemux* demux = FfmpegServerDemux::CreateNew(env, fileName, reuseSource);
+	  if (demux != NULL) {
+		  sms->addSubsession(demux->NewAudioServerMediaSubsession());
+		  sms->addSubsession(demux->NewVideoServerMediaSubsession());
+	  }
   }
 
   return sms;
