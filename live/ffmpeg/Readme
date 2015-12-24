@@ -1,0 +1,7 @@
+Create ffmpeg demuxing libraries:
+
+wget http://ffmpeg.org/releases/ffmpeg-2.8.4.tar.gz
+tar zxvf ffmpeg*.tar.gz
+cd ffmpeg*
+./configure --prefix=./install --disable-yasm --disable-asm --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-programs --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-avdevice --disable-avfilter --disable-swresample --disable-swscale --disable-postproc --disable-network --disable-debug --disable-everything --enable-decoder=mjpeg --enable-demuxer=mjpeg --enable-demuxer=h264 --enable-demuxer=hevc --enable-demuxer=aac --enable-demuxer=pcm_alaw --enable-demuxer=pcm_mulaw --enable-demuxer=mov --enable-parser=mjpeg --enable-parser=h264 --enable-parser=hevc --enable-parser=aac --enable-bsf=h264_mp4toannexb --enable-static --enable-shared --enable-protocol=file
+make clean;make;make install
