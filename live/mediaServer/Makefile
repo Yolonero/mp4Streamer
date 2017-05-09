@@ -15,6 +15,7 @@ CPLUSPLUS_COMPILER =	c++
 CPLUSPLUS_FLAGS =	$(COMPILE_OPTS) -Wall -DBSD=1 $(CPPFLAGS) $(CXXFLAGS)
 OBJ =			o
 LINK =			c++ -o
+LDFLAGS = -lavformat -lavcodec -lavutil  -lrt -lm -lpthread -lz
 LINK_OPTS =		-L. $(LDFLAGS)
 CONSOLE_LINK_OPTS =	$(LINK_OPTS)
 LIBRARY_LINK =		ar cr 
