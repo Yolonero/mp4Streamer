@@ -5,3 +5,11 @@ tar zxvf ffmpeg*.tar.gz
 cd ffmpeg*
 ./configure --prefix=./install --disable-yasm --disable-asm --disable-doc --disable-htmlpages --disable-manpages --disable-podpages --disable-txtpages --disable-programs --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver --disable-avdevice --disable-avfilter --disable-swresample --disable-swscale --disable-postproc --disable-network --disable-debug --disable-everything --enable-decoder=mjpeg --enable-demuxer=mjpeg --enable-demuxer=h264 --enable-demuxer=hevc --enable-demuxer=aac --enable-demuxer=pcm_alaw --enable-demuxer=pcm_mulaw --enable-demuxer=mov --enable-parser=mjpeg --enable-parser=h264 --enable-parser=hevc --enable-parser=aac --enable-bsf=h264_mp4toannexb --enable-static --enable-shared --enable-protocol=file
 make clean;make;make install
+
+Copy the content of the folder of "install" (include and lib) and put it in the ffmpeg directory (mp4Streamer/live/ffmpeg). They are acutally not used but they are required by the old version of mp4Streamer, and I have no time to edit it (I just edited it my way for a school project).
+
+After that, reconfigure it but edit the prefix with --prefix=/usr, make clean && make && make install.
+
+This will be the actual lib used by the Makefile of Mediaserver since the linkers are targeted on this location.
+
+I don't know if it works with another version of FFmpeg, so feel free to try but no garantee that it will work.
