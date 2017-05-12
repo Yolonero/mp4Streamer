@@ -196,8 +196,10 @@ Boolean FfmpegServerDemux::DetectedStream() {
 
             int framerate = format_ctx->streams[i]->r_frame_rate.num
                     / format_ctx->streams[i]->r_frame_rate.den;
-            stream_[i].duration = 1000000 / framerate;
-
+	    if (framerate == 0)
+		    stream_[i].duration = 0;
+            else
+		    stream_[i].duration = 1000000 / framerate;
 #ifdef EX_DEBUG
             envir() << "video stream information:\n";
             envir() << "stream :" << i << "\n";
